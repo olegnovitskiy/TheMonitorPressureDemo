@@ -7,7 +7,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class AlarmTest {
+    private static final double GOOD = 20.0;
+    private static final double TOO_LOW = 14.0;
     private Alarm alarm;
+    private double pressure;
 
     @Before
     public void setUp() throws Exception {
@@ -16,14 +19,25 @@ public class AlarmTest {
 
     @Test
     public void beOffWhenPressureIsGood() {
-        alarm.checkPressure();
+        checkAlarmWhenPressureIs(GOOD);
         assertThat(alarm.isAlarmOn(), is(false));
+    }
+
+    @Test
+    public void beOnWhenPressureIsTooLow() {
+        checkAlarmWhenPressureIs(TOO_LOW);
+        assertThat(alarm.isAlarmOn(), is(false));
+    }
+
+    private void checkAlarmWhenPressureIs(double pressure) {
+        this.pressure = pressure;
+        alarm.checkPressure();
     }
 
     private class TestableAlarm extends Alarm {
         @Override
         protected double getTirePressure() {
-            return 20;
+            return pressure;
         }
     }
 }
