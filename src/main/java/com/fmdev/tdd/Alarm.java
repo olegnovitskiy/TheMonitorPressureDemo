@@ -13,9 +13,13 @@ public class Alarm {
     public void checkPressure() {
         double psiPressureValue = getTirePressure();
 
-        if (psiPressureValue < LowPressureTreshold || HighPressureTreshold < psiPressureValue) {
+        if (pressureIsNotGood(psiPressureValue)) {
             alarmOn = true;
         }
+    }
+
+    protected boolean pressureIsNotGood(double psiPressureValue) {
+        return psiPressureValue < LowPressureTreshold || HighPressureTreshold < psiPressureValue;
     }
 
     protected double getTirePressure() {
