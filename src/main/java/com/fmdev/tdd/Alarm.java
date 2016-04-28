@@ -7,11 +7,15 @@ public class Alarm {
     private boolean alarmOn = false;
 
     public void checkPressure() {
-        double psiPressureValue = sensor.getTirePressure();
+        double psiPressureValue = getTirePressure();
 
         if (psiPressureValue < LowPressureTreshold || HighPressureTreshold < psiPressureValue) {
             alarmOn = true;
         }
+    }
+
+    protected double getTirePressure() {
+        return sensor.getTirePressure();
     }
 
     public boolean isAlarmOn() {

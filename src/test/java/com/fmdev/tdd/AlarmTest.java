@@ -11,12 +11,19 @@ public class AlarmTest {
 
     @Before
     public void setUp() throws Exception {
-        alarm = new Alarm();
+        alarm = new TestableAlarm();
     }
 
     @Test
     public void beOffWhenPressureIsGood() {
         alarm.checkPressure();
         assertThat(alarm.isAlarmOn(), is(false));
+    }
+
+    private class TestableAlarm extends Alarm {
+        @Override
+        protected double getTirePressure() {
+            return 20;
+        }
     }
 }
