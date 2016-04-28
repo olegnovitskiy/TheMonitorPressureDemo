@@ -2,22 +2,27 @@ package com.fmdev.tdd;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AlarmTest {
+    @Mock
+    private Sensor sensor;
+
     private static final double GOOD = 20.0;
     private static final double TOO_LOW = 14.0;
     private static final double TOO_HIGH = 26.0;
     private Alarm alarm;
-    private double pressure;
-    private Sensor sensor;
 
     @Before
     public void setUp() throws Exception {
-        sensor = new Sensor();
-        alarm = new TestableAlarm(sensor);
+        alarm = new Alarm(sensor);
     }
 
     @Test
@@ -39,18 +44,7 @@ public class AlarmTest {
     }
 
     private void checkAlarmWhenPressureIs(double pressure) {
-        this.pressure = pressure;
+        given(sensor.getTirePressure()).willReturn(pressure);
         alarm.checkPressure();
-    }
-
-    private class TestableAlarm extends Alarm {
-        public TestableAlarm(Sensor sensor) {
-            super(sensor);
-        }
-
-        @Override
-        protected double getTirePressure() {
-            return pressure;
-        }
     }
 }
