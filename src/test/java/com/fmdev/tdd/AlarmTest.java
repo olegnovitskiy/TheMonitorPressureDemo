@@ -26,7 +26,7 @@ public class AlarmTest {
     @Test
     public void beOnWhenPressureIsTooLow() {
         checkAlarmWhenPressureIs(TOO_LOW);
-        assertThat(alarm.isAlarmOn(), is(false));
+        assertThat(alarm.isAlarmOn(), is(true));
     }
 
     private void checkAlarmWhenPressureIs(double pressure) {
