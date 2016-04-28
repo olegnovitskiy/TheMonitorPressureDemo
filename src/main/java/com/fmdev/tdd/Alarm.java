@@ -3,8 +3,12 @@ package com.fmdev.tdd;
 public class Alarm {
     private static final double LowPressureTreshold = 17;
     private static final double HighPressureTreshold = 21;
-    private Sensor sensor = new Sensor();
+    private Sensor sensor;
     private boolean alarmOn = false;
+
+    public Alarm(Sensor sensor) {
+        this.sensor = sensor;
+    }
 
     public void checkPressure() {
         double psiPressureValue = getTirePressure();

@@ -12,10 +12,12 @@ public class AlarmTest {
     private static final double TOO_HIGH = 26.0;
     private Alarm alarm;
     private double pressure;
+    private Sensor sensor;
 
     @Before
     public void setUp() throws Exception {
-        alarm = new TestableAlarm();
+        sensor = new Sensor();
+        alarm = new TestableAlarm(sensor);
     }
 
     @Test
@@ -42,6 +44,10 @@ public class AlarmTest {
     }
 
     private class TestableAlarm extends Alarm {
+        public TestableAlarm(Sensor sensor) {
+            super(sensor);
+        }
+
         @Override
         protected double getTirePressure() {
             return pressure;
