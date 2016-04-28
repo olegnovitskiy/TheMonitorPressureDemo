@@ -1,8 +1,5 @@
 package com.fmdev.tdd;
 
-/**
- * Created by NIO on 28.04.2016. All rights reserved.
- */
 public class Alarm {
     private static final double LowPressureTreshold = 17;
     private static final double HighPressureTreshold = 21;
