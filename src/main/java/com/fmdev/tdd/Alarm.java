@@ -11,7 +11,7 @@ public class Alarm {
     }
 
     public void checkPressure() {
-        double psiPressureValue = getTirePressure();
+        double psiPressureValue = sensor.getTirePressure();
 
         if (pressureIsNotGood(psiPressureValue)) {
             alarmOn = true;
@@ -20,10 +20,6 @@ public class Alarm {
 
     protected boolean pressureIsNotGood(double psiPressureValue) {
         return psiPressureValue < LowPressureTreshold || HighPressureTreshold < psiPressureValue;
-    }
-
-    protected double getTirePressure() {
-        return sensor.getTirePressure();
     }
 
     public boolean isAlarmOn() {
